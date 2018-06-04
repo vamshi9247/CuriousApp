@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
-import com.example.vamshi.homwayprojectchallenge.Retrofit.QueryConstants;
+import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.QueryConstants;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;

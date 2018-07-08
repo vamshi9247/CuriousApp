@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     SharedPreferences favourites;
     @Inject
     RemoteRx client;
+
     @BindView(R.id.search)
     SearchView searchView;
     @BindView(R.id.recyclerview)

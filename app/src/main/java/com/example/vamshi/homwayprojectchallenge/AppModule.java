@@ -12,8 +12,9 @@ public class AppModule {
     Application application;
 
 
-    public AppModule() {
-        this.application = getApplication();
+    public AppModule(Application application) {
+
+        this.application = application;
     }
 
     @Provides

@@ -17,14 +17,15 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-            mainComponent = DaggerMainComponent.builder()
+        mainComponent = DaggerMainComponent.builder()
                 .retrofitApiClient(new RetrofitApiClient())
-                    .preferencesFactory(new PreferencesFactory())
+                .appModule(new AppModule(this))
+                .preferencesFactory(new PreferencesFactory())
                 .build();
 
     }
 
-    public  MainComponent getMainComponent() {
+    public MainComponent getMainComponent() {
         return mainComponent;
     }
 

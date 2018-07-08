@@ -9,12 +9,10 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
-@Singleton
+@MyAppScope
 @Component(modules = {RetrofitApiClient.class, PreferencesFactory.class})
 public interface MainComponent {
 
-    void Inject(MainActivity model);
-
-
+    void Inject(MainActivity mainActivity);
 
 }

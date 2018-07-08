@@ -17,10 +17,12 @@ import butterknife.ButterKnife;
  */
 
 public class PlaceDetails extends AppCompatActivity {
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.staticmap)
     ImageView staticMap;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

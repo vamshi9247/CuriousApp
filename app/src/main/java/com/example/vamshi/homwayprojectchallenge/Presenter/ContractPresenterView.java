@@ -9,11 +9,9 @@ public interface ContractPresenterView {
 
         void addFavourite(String key);
 
-        void removeFavouite(String key);
+        void removeFavourite(String key);
 
         Boolean isFavourite(String key);
-
-
 
         void maStart();
 

@@ -1,7 +1,7 @@
 package com.example.vamshi.homwayprojectchallenge.Model.Retrofit;
 
 
-import javax.inject.Singleton;
+import com.example.vamshi.homwayprojectchallenge.Dagger.MyAppScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -12,9 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class RetrofitApiClient {
 
-
     @Provides
-    @Singleton
+    @MyAppScope
     public RemoteRx callClient() {
         RemoteRx apiCall = new Retrofit.Builder()
                 .baseUrl(RemoteRx.BASE_URL)

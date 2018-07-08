@@ -35,15 +35,11 @@ public class PlacesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.mainPresenter = mainPresenter;
     }
 
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item, parent, false);
         return new ViewHolder1(v);
-
-
     }
 
     @Override
@@ -61,6 +57,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         holder1.textViewName.setText(placesinfo.getName());
         holder1.textViewCategory.setText(placesinfo.getFormattedAddress());
         holder1.Distance.setText(placesinfo.getDistance() + "");
+
         Picasso.get().load(iconUrl).into(holder1.imageView);
 
         if (mainPresenter.isFavourite(preferenceKey)) {
@@ -74,21 +71,19 @@ public class PlacesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     if (isChecked) {
                         mainPresenter.addFavourite(preferenceKey);
                     } else {
-                        mainPresenter.removeFavouite(preferenceKey);
+                        mainPresenter.removeFavourite(preferenceKey);
                     }
                 });
     }
 
     @Override
     public int getItemCount() {
-
         if (listItems == null) {
             return 0;
         } else {
             return listItems.size();
         }
     }
-
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
         @BindView(R.id.image)
@@ -102,7 +97,6 @@ public class PlacesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @BindView(R.id.favourite)
         ToggleButton favourite;
 
-
         public ViewHolder1(View itemView) {
             super(itemView);
             itemView.setOnClickListener(v -> {
@@ -110,12 +104,6 @@ public class PlacesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 context.startActivity(openPlaceDeatails);
             });
             ButterKnife.bind(this, itemView);
-
-
         }
-
-
     }
-
-
 }

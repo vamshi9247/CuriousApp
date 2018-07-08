@@ -12,7 +12,9 @@ public class QueryConstants {
     public static final String IMAGE_SIZE ="88";
     public static final String MATCH ="47.6,-122.3";
     public static final LatLng DEFAULTPLACE = new LatLng(47.6,-122.3);
+
     public static final String GMAPSSTATICKEY = "AIzaSyCkXHNdyvnFE6U7Orp4Hw5wSJeK0TzjKZc";
+
     public static final String SHAREDFAVOURITEKEY = "favourite";
     public static final String Mainbundlekey = "placeBundle ";
 

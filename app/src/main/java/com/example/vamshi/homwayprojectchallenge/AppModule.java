@@ -1,25 +1,25 @@
 package com.example.vamshi.homwayprojectchallenge;
 
-import android.app.Application;
+import android.content.Context;
 
-import javax.inject.Singleton;
+import com.example.vamshi.homwayprojectchallenge.Dagger.MyAppScope;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
 public class AppModule {
-    Application application;
+    Context appContext;
 
 
-    public AppModule(Application application) {
+    public AppModule(Context appContext) {
 
-        this.application = application;
+        this.appContext = appContext;
     }
 
     @Provides
-    @Singleton
-    public Application getApplication() {
-        return application;
+    @MyAppScope
+    public Context getApplication() {
+        return appContext;
     }
 }

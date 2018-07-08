@@ -21,7 +21,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity
 
     RecyclerView.Adapter adapter;
     ContractPresenterView.PresenterMainWork mPresenter;
-    ArrayList<Placesinfo> places ;
+    ArrayList<Placesinfo> places;
 
 
     @Inject
@@ -51,42 +50,34 @@ public class MainActivity extends AppCompatActivity
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        if (savedInstanceState != null) {
-            places = savedInstanceState.
-                    getParcelableArrayList(QueryConstants.Mainbundlekey);
-            Log.i("bundle saved", "onRestoreInstanceState: " +
-                    places +
-                    savedInstanceState.containsKey(QueryConstants.Mainbundlekey));
-        }
+        getSavedInstanceState(savedInstanceState);
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList(QueryConstants.Mainbundlekey,places);
+        outState.putParcelableArrayList(QueryConstants.Mainbundlekey, places);
         super.onSaveInstanceState(outState);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSavedInstanceState(savedInstanceState);
 
-        ((MyApp)getApplication()).getMainComponent().Inject(this);
-
-        setContentView(R.layout.activity_main);
+        ((MyApp) getApplication()).getMainComponent().Inject(this);
         ButterKnife.bind(this);
+        setContentView(R.layout.activity_main);
 
-        mPresenter = new MyPresenterMain(client,favourites);
+
+        mPresenter = new MyPresenterMain(client, favourites);
         searchView.setOnQueryTextListener(this);
         searchView.setOnCloseListener(this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PlacesAdapter(places, this,mPresenter);
+        adapter = new PlacesAdapter(places, this, mPresenter);
         recyclerView.setAdapter(adapter);
 
     }
-
 
     @Override
     public boolean onQueryTextSubmit(String query) {
@@ -108,7 +99,7 @@ public class MainActivity extends AppCompatActivity
             places.clear();
         }
 
-        adapter = new PlacesAdapter(places, this,mPresenter);
+        adapter = new PlacesAdapter(places, this, mPresenter);
         recyclerView.setAdapter(adapter);
 
         return false;
@@ -118,24 +109,20 @@ public class MainActivity extends AppCompatActivity
     void fabClick() {
 
         Intent startMap = new Intent(this, MapActivity.class);
-        startMap.putParcelableArrayListExtra(QueryConstants.Mainbundlekey,places);
+        startMap.putParcelableArrayListExtra(QueryConstants.Mainbundlekey, places);
         startActivity(startMap);
         Toast.makeText(this, "Map", Toast.LENGTH_SHORT).show();
 
     }
 
-    void saveBundle(Bundle outState){
-
-        outState.putParcelableArrayList(QueryConstants.Mainbundlekey,places);
-        Log.i("Bundle", "saveBundle: yes ");
-    }
-
-    void getBundle(Bundle savedInstanceState){
-        if(savedInstanceState!=null){
-            places = savedInstanceState.getParcelableArrayList(QueryConstants.Mainbundlekey);
-
+    void getSavedInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            places = savedInstanceState.
+                    getParcelableArrayList(QueryConstants.Mainbundlekey);
+            Log.i("bundle saved", "onRestoreInstanceState: " +
+                    places +
+                    savedInstanceState.containsKey(QueryConstants.Mainbundlekey));
         }
-
     }
 
     @Override
@@ -160,17 +147,15 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
-  // hello this is for git testing part
+    // hello this is for git testing part
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void changePlacesAdapter(ArrayList<Placesinfo> placeEvent) {
 
         places = placeEvent;
-        adapter = new PlacesAdapter(places, this,mPresenter);
+        adapter = new PlacesAdapter(places, this, mPresenter);
         recyclerView.setAdapter(adapter);
 
         Log.i("CHANGE PLACE ADAPTER", "changePlacesAdapter: yes");
     }
-
 
 }

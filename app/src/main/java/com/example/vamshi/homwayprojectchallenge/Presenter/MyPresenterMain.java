@@ -31,7 +31,7 @@ public class MyPresenterMain implements ContractPresenterView.PresenterMainWork 
     @Override
     public void getPlaces(String query) {
 
-        Observable<Response<JsonOutput>> observable = callClient.getPlaceDetailsForQuery(
+        Observable<Response<JsonOutput>> observable = callClient.QueryPlaceDetails(
                 QueryConstants.NEAR,
                 QueryConstants.MATCH,
                 QueryConstants.RADIUS,
@@ -48,7 +48,6 @@ public class MyPresenterMain implements ContractPresenterView.PresenterMainWork 
 
     }
 
-
     @Override
     public void addFavourite(String key) {
 
@@ -59,7 +58,7 @@ public class MyPresenterMain implements ContractPresenterView.PresenterMainWork 
     }
 
     @Override
-    public void removeFavouite(String key) {
+    public void removeFavourite(String key) {
         SharedPreferences.Editor spEdit = favourites.edit();
         spEdit.remove(key);
         spEdit.commit();

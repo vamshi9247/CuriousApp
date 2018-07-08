@@ -1,27 +1,27 @@
 package com.example.vamshi.homwayprojectchallenge.Model;
 
-import android.app.Application;
-
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.vamshi.homwayprojectchallenge.AppModule;
+import com.example.vamshi.homwayprojectchallenge.Dagger.MyAppScope;
 import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.QueryConstants;
-
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 
 import static android.content.Context.MODE_PRIVATE;
 
-@Module (includes = AppModule.class)
+@Module(includes = AppModule.class)
 public class PreferencesFactory {
 
     @Provides
-    @Singleton
-    public SharedPreferences getPreferences(Application context) {
+    @MyAppScope
+    public SharedPreferences getPreferences(Context context) {
 
-        SharedPreferences favourites =context.getSharedPreferences(QueryConstants.SHAREDFAVOURITEKEY,MODE_PRIVATE);
+        SharedPreferences favourites = context.getSharedPreferences(
+                QueryConstants.SHAREDFAVOURITEKEY,
+                MODE_PRIVATE);
 
         return favourites;
     }

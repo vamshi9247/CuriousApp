@@ -1,4 +1,4 @@
-package com.example.vamshi.homwayprojectchallenge;
+package com.example.vamshi.homwayprojectchallenge.Presenter;
 
 public interface ContractPresenterView {
 

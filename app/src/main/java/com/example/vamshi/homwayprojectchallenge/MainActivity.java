@@ -1,6 +1,5 @@
 package com.example.vamshi.homwayprojectchallenge;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -8,34 +7,40 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.test.suitebuilder.annotation.Suppress;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.vamshi.homwayprojectchallenge.Model.CallObserver;
+import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.RemoteRx;
+import com.example.vamshi.homwayprojectchallenge.Presenter.ContractPresenterView;
 import com.example.vamshi.homwayprojectchallenge.Presenter.MyPresenterMain;
-import com.example.vamshi.homwayprojectchallenge.Retrofit.QueryConstants;
+import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.QueryConstants;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.List;
 
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
+public class MainActivity extends AppCompatActivity
+        implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
-    private RecyclerView.Adapter adapter;
+    RecyclerView.Adapter adapter;
     ContractPresenterView.PresenterMainWork mPresenter;
     ArrayList<Placesinfo> places ;
 
 
+    @Inject
+    SharedPreferences favourites;
+    @Inject
+    RemoteRx client;
     @BindView(R.id.search)
     SearchView searchView;
     @BindView(R.id.recyclerview)
@@ -45,9 +50,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        if(savedInstanceState!=null){
-            places = savedInstanceState.getParcelableArrayList(QueryConstants.Mainbundlekey);
-            Log.i("bundle saved", "onRestoreInstanceState: "+ places + savedInstanceState.containsKey(QueryConstants.Mainbundlekey));
+        if (savedInstanceState != null) {
+            places = savedInstanceState.
+                    getParcelableArrayList(QueryConstants.Mainbundlekey);
+            Log.i("bundle saved", "onRestoreInstanceState: " +
+                    places +
+                    savedInstanceState.containsKey(QueryConstants.Mainbundlekey));
         }
     }
 
@@ -62,15 +70,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState!=null){
-            places = savedInstanceState.getParcelableArrayList(QueryConstants.Mainbundlekey);
-            Log.i("bundle saved", "onRestoreInstanceState: "+ places + savedInstanceState.containsKey(QueryConstants.Mainbundlekey));
-        }
+
+        ((MyApp)getApplication()).getMainComponent().Inject(this);
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        SharedPreferences favourites = getSharedPreferences(QueryConstants.SHAREDFAVOURITEKEY,MODE_PRIVATE);
-        mPresenter = new MyPresenterMain(favourites);
+
+        mPresenter = new MyPresenterMain(client,favourites);
         searchView.setOnQueryTextListener(this);
         searchView.setOnCloseListener(this);
         recyclerView.setHasFixedSize(true);
@@ -153,6 +159,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     }
 
+
+  // hello this is for git testing part
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void changePlacesAdapter(ArrayList<Placesinfo> placeEvent) {
 

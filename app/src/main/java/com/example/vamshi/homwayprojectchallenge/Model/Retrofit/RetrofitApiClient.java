@@ -1,39 +1,29 @@
 package com.example.vamshi.homwayprojectchallenge.Model.Retrofit;
 
 
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitApiClient  {
+@Module
+public class RetrofitApiClient {
 
-    private static RetrofitApiClient retrofitApiClient = null;
 
-    private RemoteRx apiCall;
-
-    private RetrofitApiClient(){
-
-        Retrofit retrofit = new Retrofit.Builder()
+    @Provides
+    @Singleton
+    public RemoteRx callClient() {
+        RemoteRx apiCall = new Retrofit.Builder()
                 .baseUrl(RemoteRx.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-
-
-        apiCall = retrofit.create(RemoteRx.class);
-    }
-
-    public static RetrofitApiClient getInstance(){
-        if (retrofitApiClient == null){
-            retrofitApiClient = new RetrofitApiClient();
-        }
-        return retrofitApiClient;
-    }
-
-   public RemoteRx getEndPoint(){
+                .build()
+                .create(RemoteRx.class);
         return apiCall;
     }
-
 
 
 }

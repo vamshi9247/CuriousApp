@@ -2,24 +2,49 @@ package com.example.vamshi.homwayprojectchallenge.Presenter;
 
 import android.content.SharedPreferences;
 
-import com.example.vamshi.homwayprojectchallenge.ContractPresenterView;
-import com.example.vamshi.homwayprojectchallenge.Model.MyModel;
-import com.google.gson.Gson;
+import com.example.vamshi.homwayprojectchallenge.Model.CallObserver;
+import com.example.vamshi.homwayprojectchallenge.Model.JsonOutput;
+import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.QueryConstants;
+import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.RemoteRx;
 
-public class  MyPresenterMain implements ContractPresenterView.PresenterMainWork,ContractPresenterModel.PresenterWork{
+import javax.inject.Inject;
 
-    ContractPresenterModel.ModelWork myModel = new MyModel(this);
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
+
+public class MyPresenterMain implements ContractPresenterView.PresenterMainWork {
+
 
     SharedPreferences favourites;
+    RemoteRx callClient;
 
-    public MyPresenterMain(SharedPreferences favourites) {
+
+    @Inject
+    public MyPresenterMain(RemoteRx callClient, SharedPreferences favourites) {
         this.favourites = favourites;
+        this.callClient = callClient;
     }
 
     @Override
-    public void getPlaces(String s) {
+    public void getPlaces(String query) {
 
-        myModel.requestCall(s);
+        Observable<Response<JsonOutput>> observable = callClient.getPlaceDetailsForQuery(
+                QueryConstants.NEAR,
+                QueryConstants.MATCH,
+                QueryConstants.RADIUS,
+                query,
+                QueryConstants.FOURSQUARE_CLIENT_KEY,
+                QueryConstants.FOURSQUARE_CLIENT_SECRET,
+                QueryConstants.YYYMMDD);
+
+
+        Observer<Response<JsonOutput>> observer = new CallObserver();
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
 
     }
 
@@ -28,14 +53,14 @@ public class  MyPresenterMain implements ContractPresenterView.PresenterMainWork
     public void addFavourite(String key) {
 
         SharedPreferences.Editor spEdit = favourites.edit();
-        spEdit.putBoolean(key,true);
+        spEdit.putBoolean(key, true);
         spEdit.commit();
 
     }
 
     @Override
     public void removeFavouite(String key) {
-        SharedPreferences.Editor spEdit =favourites.edit();
+        SharedPreferences.Editor spEdit = favourites.edit();
         spEdit.remove(key);
         spEdit.commit();
 
@@ -44,9 +69,9 @@ public class  MyPresenterMain implements ContractPresenterView.PresenterMainWork
     @Override
     public Boolean isFavourite(String key) {
 
-        if(favourites==null){
+        if (favourites == null) {
             return false;
-        }else{
+        } else {
             return favourites.contains(key);
         }
 

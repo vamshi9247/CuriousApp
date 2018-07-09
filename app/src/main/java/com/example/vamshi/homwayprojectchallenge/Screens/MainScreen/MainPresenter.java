@@ -1,8 +1,11 @@
-package com.example.vamshi.homwayprojectchallenge.Presenter;
+package com.example.vamshi.homwayprojectchallenge.Screens.MainScreen;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
+import com.example.vamshi.homwayprojectchallenge.Dagger.Qualifiers.QFourSquareGetRequest;
 import com.example.vamshi.homwayprojectchallenge.Model.CallObserver;
+import com.example.vamshi.homwayprojectchallenge.Model.JsonDistanceMatrix;
 import com.example.vamshi.homwayprojectchallenge.Model.JsonOutput;
 import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.QueryConstants;
 import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.RemoteRx;
@@ -10,12 +13,15 @@ import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.RemoteRx;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class MyPresenterMain implements ContractPresenterView.PresenterMainWork {
+public class MainPresenter implements ContractPresenterView.PresenterMainWork {
 
 
     SharedPreferences favourites;
@@ -23,14 +29,14 @@ public class MyPresenterMain implements ContractPresenterView.PresenterMainWork 
 
 
     @Inject
-    public MyPresenterMain(RemoteRx callClient, SharedPreferences favourites) {
+    public MainPresenter(@QFourSquareGetRequest RemoteRx callClient,
+                         SharedPreferences favourites) {
         this.favourites = favourites;
         this.callClient = callClient;
     }
 
     @Override
     public void getPlaces(String query) {
-
         Observable<Response<JsonOutput>> observable = callClient.QueryPlaceDetails(
                 QueryConstants.NEAR,
                 QueryConstants.MATCH,
@@ -41,11 +47,10 @@ public class MyPresenterMain implements ContractPresenterView.PresenterMainWork 
                 QueryConstants.YYYMMDD);
 
 
-        Observer<Response<JsonOutput>> observer = new CallObserver();
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
 
+        observable.subscribeOn(Schedulers.computation())
+                .observeOn(Schedulers.computation())
+                .subscribe(new CallObserver());
     }
 
     @Override
@@ -73,7 +78,6 @@ public class MyPresenterMain implements ContractPresenterView.PresenterMainWork 
         } else {
             return favourites.contains(key);
         }
-
     }
 
     @Override

@@ -9,10 +9,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
 
-
-
-public class Placesinfo implements ClusterItem, Parcelable {
-    public Placesinfo(String placeId, String name, int distance, String formattedAddress, double lng, double lat, String prefixicon, String suffixicon) {
+public class PlacesEntity implements ClusterItem, Parcelable {
+    public PlacesEntity(String placeId, String name, int distance, String formattedAddress, double lng, double lat, String prefixicon, String suffixicon) {
         this.name = name;
         this.distance = distance;
         this.formattedAddress = formattedAddress;
@@ -52,18 +50,18 @@ public class Placesinfo implements ClusterItem, Parcelable {
     }
 
 
-    public static final Parcelable.Creator<Placesinfo> CREATOR = new Parcelable.Creator<Placesinfo>() {
-        public Placesinfo createFromParcel(Parcel in) {
-            return new Placesinfo(in);
+    public static final Parcelable.Creator<PlacesEntity> CREATOR = new Parcelable.Creator<PlacesEntity>() {
+        public PlacesEntity createFromParcel(Parcel in) {
+            return new PlacesEntity(in);
         }
 
-        public Placesinfo[] newArray(int size) {
-            return new Placesinfo[size];
+        public PlacesEntity[] newArray(int size) {
+            return new PlacesEntity[size];
         }
     };
 
 
-    private Placesinfo(Parcel in) {
+    private PlacesEntity(Parcel in) {
 
         this.name = in.readString();
         this.distance = in.readInt();
@@ -157,7 +155,6 @@ public class Placesinfo implements ClusterItem, Parcelable {
     public void setSuffixicon(String suffixicon) {
         this.suffixicon = suffixicon;
     }
-
 
 
     @Override

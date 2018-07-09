@@ -6,6 +6,7 @@ public class QueryConstants {
 
     public static final String FOURSQUARE_CLIENT_KEY = "TXU3LXIDMFX2GNDK3A1AHYIATBUTFI12H4HWDMPGTP5AQXIZ";
     public static final String FOURSQUARE_CLIENT_SECRET = "YJDUWJJ4RBWNKJU1OCWO2ITSS5WPYT1GX4ZW52YJUBD3JIHI";
+    public static final String UNITS = "imperial";
     public static final String NEAR = "Seattle,WA";
     public static final String RADIUS ="50000";
     public static final String YYYMMDD ="20180426";

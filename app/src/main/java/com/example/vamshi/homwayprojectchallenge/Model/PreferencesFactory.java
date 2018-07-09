@@ -3,8 +3,8 @@ package com.example.vamshi.homwayprojectchallenge.Model;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.vamshi.homwayprojectchallenge.AppModule;
-import com.example.vamshi.homwayprojectchallenge.Dagger.MyAppScope;
+import com.example.vamshi.homwayprojectchallenge.Dagger.AppContextModule;
+import com.example.vamshi.homwayprojectchallenge.Dagger.Scopes.MyAppScope;
 import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.QueryConstants;
 
 import dagger.Module;
@@ -12,7 +12,7 @@ import dagger.Provides;
 
 import static android.content.Context.MODE_PRIVATE;
 
-@Module(includes = AppModule.class)
+@Module(includes = AppContextModule.class)
 public class PreferencesFactory {
 
     @Provides

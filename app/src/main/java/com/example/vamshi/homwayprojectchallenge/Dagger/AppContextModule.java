@@ -1,18 +1,18 @@
-package com.example.vamshi.homwayprojectchallenge;
+package com.example.vamshi.homwayprojectchallenge.Dagger;
 
 import android.content.Context;
 
-import com.example.vamshi.homwayprojectchallenge.Dagger.MyAppScope;
+import com.example.vamshi.homwayprojectchallenge.Dagger.Scopes.MyAppScope;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class AppModule {
+public class AppContextModule {
     Context appContext;
 
 
-    public AppModule(Context appContext) {
+    public AppContextModule(Context appContext) {
 
         this.appContext = appContext;
     }

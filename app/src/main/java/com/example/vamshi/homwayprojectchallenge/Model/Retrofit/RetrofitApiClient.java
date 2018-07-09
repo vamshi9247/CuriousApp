@@ -1,7 +1,9 @@
 package com.example.vamshi.homwayprojectchallenge.Model.Retrofit;
 
 
-import com.example.vamshi.homwayprojectchallenge.Dagger.MyAppScope;
+import com.example.vamshi.homwayprojectchallenge.Dagger.Scopes.MyAppScope;
+import com.example.vamshi.homwayprojectchallenge.Dagger.Qualifiers.QFourSquareGetRequest;
+import com.example.vamshi.homwayprojectchallenge.Dagger.Qualifiers.QGoogleDistanceGetRequest;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,14 +16,28 @@ public class RetrofitApiClient {
 
     @Provides
     @MyAppScope
-    public RemoteRx callClient() {
-        RemoteRx apiCall = new Retrofit.Builder()
-                .baseUrl(RemoteRx.BASE_URL)
+    @QFourSquareGetRequest
+    public RemoteRx callFourSquareClient() {
+        RemoteRx fourSquareApiCall = new Retrofit.Builder()
+                .baseUrl(RemoteRx.FOURSQUARE_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
                 .create(RemoteRx.class);
-        return apiCall;
+        return fourSquareApiCall ;
+    }
+
+    @Provides
+    @MyAppScope
+    @QGoogleDistanceGetRequest
+    public RemoteRx callGoogleClient(){
+        RemoteRx googleDistanceApiCall = new Retrofit.Builder()
+                .baseUrl(RemoteRx.GOOGLE_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+                .create(RemoteRx.class);
+        return googleDistanceApiCall;
     }
 
 

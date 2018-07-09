@@ -2,28 +2,32 @@ package com.example.vamshi.homwayprojectchallenge;
 
 import android.app.Application;
 
-
-import com.example.vamshi.homwayprojectchallenge.Dagger.DaggerMainComponent;
-import com.example.vamshi.homwayprojectchallenge.Dagger.MainComponent;
+import com.example.vamshi.homwayprojectchallenge.Dagger.Components.AppComponent;
+import com.example.vamshi.homwayprojectchallenge.Dagger.AppContextModule;
+import com.example.vamshi.homwayprojectchallenge.Dagger.Components.DaggerAppComponent;
 import com.example.vamshi.homwayprojectchallenge.Model.PreferencesFactory;
 import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.RetrofitApiClient;
 
 
 public class MyApp extends Application {
 
-    private MainComponent mainComponent;
+   private AppComponent appComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mainComponent = DaggerMainComponent.builder()
+       appComponent= DaggerAppComponent.builder()
                 .retrofitApiClient(new RetrofitApiClient())
-                .appModule(new AppModule(this))
+                .appContextModule(new AppContextModule(this))
                 .preferencesFactory(new PreferencesFactory())
                 .build();
+
+
     }
 
-    public MainComponent getMainComponent() {
-        return mainComponent;
+   public AppComponent getAppComponent(){
+         return appComponent;
     }
+
+
 }

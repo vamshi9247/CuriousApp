@@ -1,4 +1,4 @@
-package com.example.vamshi.homwayprojectchallenge;
+package com.example.vamshi.homwayprojectchallenge.Screens.PlacedetailsScreen;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
 import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.QueryConstants;
+import com.example.vamshi.homwayprojectchallenge.R;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;

@@ -1,4 +1,4 @@
-package com.example.vamshi.homwayprojectchallenge.Dagger;
+package com.example.vamshi.homwayprojectchallenge.Dagger.Scopes;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

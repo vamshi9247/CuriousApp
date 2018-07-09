@@ -1,7 +1,6 @@
-package com.example.vamshi.homwayprojectchallenge.Presenter;
+package com.example.vamshi.homwayprojectchallenge.Screens.MainScreen;
 
 public interface ContractPresenterView {
-
 
     interface PresenterMainWork {
 
@@ -17,17 +16,6 @@ public interface ContractPresenterView {
 
         void maStop();
 
-    }
-
-    interface ViewMapWork {
-
-        void displayMap();
-
-    }
-
-    interface ViewPlaceWork {
-
-        void displayPlaces();
     }
 
 }

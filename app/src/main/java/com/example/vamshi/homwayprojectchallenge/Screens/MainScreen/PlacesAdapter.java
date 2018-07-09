@@ -1,4 +1,4 @@
-package com.example.vamshi.homwayprojectchallenge;
+package com.example.vamshi.homwayprojectchallenge.Screens.MainScreen;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,9 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.vamshi.homwayprojectchallenge.Model.Retrofit.QueryConstants;
-import com.example.vamshi.homwayprojectchallenge.Presenter.ContractPresenterView;
+import com.example.vamshi.homwayprojectchallenge.Screens.PlacedetailsScreen.PlaceDetails;
+import com.example.vamshi.homwayprojectchallenge.PlacesEntity;
+import com.example.vamshi.homwayprojectchallenge.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,12 +24,12 @@ import butterknife.ButterKnife;
 
 public class PlacesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Placesinfo> listItems;
+    private List<PlacesEntity> listItems;
     private Context context;
     private ContractPresenterView.PresenterMainWork mainPresenter;
     private String preferenceKey;
 
-    public PlacesAdapter(List<Placesinfo> listItems,
+    public PlacesAdapter(List<PlacesEntity> listItems,
                          Context context,
                          ContractPresenterView.PresenterMainWork mainPresenter) {
         this.listItems = listItems;
@@ -45,18 +47,18 @@ public class PlacesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        final Placesinfo placesinfo = listItems.get(position);
+        final PlacesEntity placesEntity = listItems.get(position);
 
-        String iconUrl = placesinfo.getPrefixicon() +
+        String iconUrl = placesEntity.getPrefixicon() +
                 QueryConstants.IMAGE_SIZE +
-                placesinfo.getSuffixicon();
+                placesEntity.getSuffixicon();
 
-        preferenceKey = placesinfo.getPlaceId();
+        preferenceKey = placesEntity.getPlaceId();
 
         ViewHolder1 holder1 = (ViewHolder1) holder;
-        holder1.textViewName.setText(placesinfo.getName());
-        holder1.textViewCategory.setText(placesinfo.getFormattedAddress());
-        holder1.Distance.setText(placesinfo.getDistance() + "");
+        holder1.textViewName.setText(placesEntity.getName());
+        holder1.textViewCategory.setText(placesEntity.getFormattedAddress());
+        holder1.Distance.setText(placesEntity.getDistance() + "");
 
         Picasso.get().load(iconUrl).into(holder1.imageView);
 

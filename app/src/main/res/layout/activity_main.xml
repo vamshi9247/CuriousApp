@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.vamshi.homwayprojectchallenge.MainActivity">
+    tools:context="com.example.vamshi.Curious.MainActivity">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.SearchView
-            android:id="@+id/search"
+            android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -32,7 +32,7 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="583dp"
         android:layout_alignParentBottom="true"
@@ -51,7 +51,7 @@
 
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabmap"
+        android:id="@+id/fab_map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

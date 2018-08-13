@@ -61,7 +61,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         holder1.Distance.setText(placeEntity.getDistance() + "");
         holder1.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, PlaceDetails.class);
-            intent.putExtra("mainToDetail", placeEntity);
+            intent.putExtra(QueryConstants.MAIN_INTENT_DETAIL, placeEntity);
             context.startActivity(intent);
         });
 

@@ -8,7 +8,7 @@ import com.example.vamshi.Curious.Model.Retrofit.QueryConstants;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class PlacesEntity implements ClusterItem, Parcelable {
@@ -33,7 +33,7 @@ public class PlacesEntity implements ClusterItem, Parcelable {
     private String prefixicon;
     private String suffixicon;
     private String placeId;
-    private List<PhotoEntity> photos;
+    private Pics pics;
     private String mapUrl ;
 
     @Override
@@ -161,12 +161,12 @@ public class PlacesEntity implements ClusterItem, Parcelable {
         this.suffixicon = suffixicon;
     }
 
-    public List<PhotoEntity> getPhotos() {
-        return photos;
+    public Pics getPics() {
+        return pics;
     }
 
-    public void setPhotos(List<PhotoEntity> photos) {
-        this.photos = photos;
+    public void setPics(Pics pics) {
+        this.pics = pics;
     }
 
     public String getMapUrl() {
@@ -175,7 +175,7 @@ public class PlacesEntity implements ClusterItem, Parcelable {
                 "format=jpg&" +
                 "maptype=satellite&"+
                 "size=300x300&" +
-                "markers=color:red%7Clabel:"+name.charAt(0)+"%7C+"+lat+","+lng+"&"+
+                "markers=color:red%7Clabel:"+name.toUpperCase().charAt(0)+"%7C+"+lat+","+lng+"&"+
                 "scale=2&" +
                 "key=" + QueryConstants.GMAPSSTATICKEY;
 
@@ -190,4 +190,8 @@ public class PlacesEntity implements ClusterItem, Parcelable {
 
 
     }
+
+
 }
+
+

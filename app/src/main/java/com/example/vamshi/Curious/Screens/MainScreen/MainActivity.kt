@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun changePlacesAdapter(placeEvent: ArrayList<PlacesEntity>) {
+   public fun changePlacesAdapter(placeEvent: ArrayList<PlacesEntity>) {
         places = placeEvent
         recycler_view.adapter = PlacesAdapter(places, this, mPresenter)
 

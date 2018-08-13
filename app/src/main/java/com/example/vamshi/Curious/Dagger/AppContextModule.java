@@ -11,7 +11,6 @@ import dagger.Provides;
 public class AppContextModule {
     Context appContext;
 
-
     public AppContextModule(Context appContext) {
 
         this.appContext = appContext;

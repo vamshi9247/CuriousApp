@@ -17,19 +17,14 @@ class PlaceDetailPresenter @Inject constructor(var placesEntity: PlacesEntity,
 
     override fun getPhotos() {
 
-
-
         var observable = getplacePhotos.QueryPlacePhotos(placesEntity.placeId,
                 QueryConstants.FOURSQUARE_CLIENT_KEY,
                 QueryConstants.FOURSQUARE_CLIENT_SECRET,
                 QueryConstants.YYYMMDD)
 
-
-        observable.subscribeOn(Schedulers.io())
+         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(PhotoObserver())
-
-
     }
 
 

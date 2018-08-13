@@ -4,18 +4,15 @@ import android.content.SharedPreferences
 import android.location.Location
 
 import com.example.vamshi.Curious.Dagger.Qualifiers.QFourSquareGetRequest
-import com.example.vamshi.Curious.Model.JsonOutput
 import com.example.vamshi.Curious.Model.Retrofit.QueryConstants
 import com.example.vamshi.Curious.Model.Retrofit.RemoteRx
 import com.google.android.gms.maps.model.LatLng
 
 import javax.inject.Inject
 
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Response
 import kotlin.math.truncate
 
 class MainPresenter @Inject

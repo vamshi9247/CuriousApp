@@ -60,17 +60,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mClusterPlacesManager.addItems(places);
         mClusterPlacesManager.setAnimation(true);
 
-        mClusterPlacesManager.setOnClusterItemInfoWindowClickListener(v -> {
-                Intent intent = new Intent(MapActivity.this, PlaceDetails.class);
-                startActivity(intent);
-            Log.i("start activity place", "onMapReady: ");
-        });
+        map.setOnInfoWindowClickListener( v-> {
+
+            Intent intent = new Intent(MapActivity.this, PlaceDetails.class);
+
+            startActivity(intent);
+            Log.i("start activity place", "onMapReady: ");});
+
 
         map.setOnCameraIdleListener(mClusterPlacesManager);
         map.setOnMarkerClickListener(mClusterPlacesManager);
         map.getUiSettings().setZoomControlsEnabled(true);
 
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(QueryConstants.CURRENT_PLACE, 12));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(QueryConstants.CURRENT_PLACE, 8));
 
         Log.i("map style", "onMapReady: " + success);
     }

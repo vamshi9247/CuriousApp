@@ -12,9 +12,9 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.vamshi.Curious.Model.Retrofit.QueryConstants;
-import com.example.vamshi.Curious.Screens.PlacedetailsScreen.PlaceDetails;
 import com.example.vamshi.Curious.PlacesEntity;
 import com.example.vamshi.Curious.R;
+import com.example.vamshi.Curious.Screens.PlacedetailsScreen.PlaceDetails;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -26,12 +26,12 @@ public class PlacesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private List<PlacesEntity> listItems;
     private Context context;
-    private ContractPresenterView.PresenterMainWork mainPresenter;
+    private MainContractor.PresenterMainWork mainPresenter;
     private String preferenceKey;
 
     public PlacesAdapter(List<PlacesEntity> listItems,
                          Context context,
-                         ContractPresenterView.PresenterMainWork mainPresenter) {
+                         MainContractor.PresenterMainWork mainPresenter) {
         this.listItems = listItems;
         this.context = context;
         this.mainPresenter = mainPresenter;
@@ -47,18 +47,23 @@ public class PlacesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        final PlacesEntity placesEntity = listItems.get(position);
+        PlacesEntity placeEntity = listItems.get(position);
 
-        String iconUrl = placesEntity.getPrefixicon() +
+        String iconUrl = placeEntity.getPrefixicon() +
                 QueryConstants.IMAGE_SIZE +
-                placesEntity.getSuffixicon();
+                placeEntity.getSuffixicon();
 
-        preferenceKey = placesEntity.getPlaceId();
-
+        preferenceKey = placeEntity.getPlaceId();
         ViewHolder1 holder1 = (ViewHolder1) holder;
-        holder1.textViewName.setText(placesEntity.getName());
-        holder1.textViewCategory.setText(placesEntity.getFormattedAddress());
-        holder1.Distance.setText(placesEntity.getDistance() + "");
+
+        holder1.textViewName.setText(placeEntity.getName());
+        holder1.textViewCategory.setText(placeEntity.getFormattedAddress());
+        holder1.Distance.setText(placeEntity.getDistance() + "");
+        holder1.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, PlaceDetails.class);
+            intent.putExtra("mainToDetail", placeEntity);
+            context.startActivity(intent);
+        });
 
         Picasso.get().load(iconUrl).into(holder1.imageView);
 
@@ -99,12 +104,11 @@ public class PlacesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @BindView(R.id.favourite)
         ToggleButton favourite;
 
+        View itemView;
+
         public ViewHolder1(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(v -> {
-                Intent openPlaceDeatails = new Intent(context, PlaceDetails.class);
-                context.startActivity(openPlaceDeatails);
-            });
+            this.itemView = itemView;
             ButterKnife.bind(this, itemView);
         }
     }

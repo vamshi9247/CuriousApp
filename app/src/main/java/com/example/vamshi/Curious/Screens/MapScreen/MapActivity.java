@@ -59,16 +59,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         ClusterManager mClusterPlacesManager = new ClusterManager<PlacesEntity>(this, map);
         mClusterPlacesManager.addItems(places);
         mClusterPlacesManager.setAnimation(true);
+
         mClusterPlacesManager.setOnClusterItemInfoWindowClickListener(v -> {
                 Intent intent = new Intent(MapActivity.this, PlaceDetails.class);
                 startActivity(intent);
             Log.i("start activity place", "onMapReady: ");
         });
+
         map.setOnCameraIdleListener(mClusterPlacesManager);
         map.setOnMarkerClickListener(mClusterPlacesManager);
         map.getUiSettings().setZoomControlsEnabled(true);
 
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(QueryConstants.DEFAULTPLACE, 12));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(QueryConstants.CURRENT_PLACE, 12));
 
         Log.i("map style", "onMapReady: " + success);
     }

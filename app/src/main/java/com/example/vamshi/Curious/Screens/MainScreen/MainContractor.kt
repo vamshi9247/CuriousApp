@@ -1,10 +1,14 @@
 package com.example.vamshi.Curious.Screens.MainScreen
 
-interface ContractPresenterView {
+import android.location.Location
+
+interface MainContractor {
 
     interface PresenterMainWork {
 
         fun getPlaces(s: String): Boolean
+
+        fun currentLocation(location: Location?)
 
         fun addFavourite(key: String)
 

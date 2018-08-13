@@ -3,7 +3,7 @@ package com.example.vamshi.Curious.Model.Retrofit;
 
 import com.example.vamshi.Curious.Dagger.Scopes.MyAppScope;
 import com.example.vamshi.Curious.Dagger.Qualifiers.QFourSquareGetRequest;
-import com.example.vamshi.Curious.Dagger.Qualifiers.QGoogleDistanceGetRequest;
+import com.example.vamshi.Curious.Dagger.Qualifiers.QPlacePhotosGetRequest;
 
 import dagger.Module;
 import dagger.Provides;
@@ -29,10 +29,10 @@ public class RetrofitApiClient {
 
     @Provides
     @MyAppScope
-    @QGoogleDistanceGetRequest
+    @QPlacePhotosGetRequest
     public RemoteRx callGoogleClient(){
         RemoteRx googleDistanceApiCall = new Retrofit.Builder()
-                .baseUrl(RemoteRx.GOOGLE_BASE_URL)
+                .baseUrl(RemoteRx.FOURSQUARE_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()

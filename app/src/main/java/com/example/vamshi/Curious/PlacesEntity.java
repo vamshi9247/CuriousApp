@@ -4,12 +4,15 @@ package com.example.vamshi.Curious;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
+import com.example.vamshi.Curious.Model.Retrofit.QueryConstants;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
+import java.util.List;
+
 
 public class PlacesEntity implements ClusterItem, Parcelable {
+
     public PlacesEntity(String placeId, String name, int distance, String formattedAddress, double lng, double lat, String prefixicon, String suffixicon) {
         this.name = name;
         this.distance = distance;
@@ -30,6 +33,8 @@ public class PlacesEntity implements ClusterItem, Parcelable {
     private String prefixicon;
     private String suffixicon;
     private String placeId;
+    private List<PhotoEntity> photos;
+    private String mapUrl ;
 
     @Override
     public int describeContents() {
@@ -155,6 +160,28 @@ public class PlacesEntity implements ClusterItem, Parcelable {
     public void setSuffixicon(String suffixicon) {
         this.suffixicon = suffixicon;
     }
+
+    public List<PhotoEntity> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<PhotoEntity> photos) {
+        this.photos = photos;
+    }
+
+    public String getMapUrl() {
+        this.mapUrl = "https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+lng+"&"+
+                "zoom=14&" +
+                "format=jpg&" +
+                "maptype=satellite&"+
+                "size=300x300&" +
+                "markers=color:red%7Clabel:"+name.charAt(0)+"%7C+"+lat+","+lng+"&"+
+                "scale=2&" +
+                "key=" + QueryConstants.GMAPSSTATICKEY;
+
+        return mapUrl;
+    }
+
 
 
     @Override

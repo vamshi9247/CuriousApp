@@ -1,7 +1,10 @@
-package com.example.vamshi.Curious.Model;
+package com.example.vamshi.Curious.Screens.MainScreen;
 
 import android.util.Log;
 
+import com.example.vamshi.Curious.Model.Icon;
+import com.example.vamshi.Curious.Model.JsonOutput;
+import com.example.vamshi.Curious.Model.Venues;
 import com.example.vamshi.Curious.PlacesEntity;
 
 import org.greenrobot.eventbus.EventBus;

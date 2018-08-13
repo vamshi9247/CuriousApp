@@ -3,7 +3,7 @@ package com.example.vamshi.Curious.Dagger.Components;
 import android.content.SharedPreferences;
 
 import com.example.vamshi.Curious.Dagger.Qualifiers.QFourSquareGetRequest;
-import com.example.vamshi.Curious.Dagger.Qualifiers.QGoogleDistanceGetRequest;
+import com.example.vamshi.Curious.Dagger.Qualifiers.QPlacePhotosGetRequest;
 import com.example.vamshi.Curious.Dagger.Scopes.MyAppScope;
 import com.example.vamshi.Curious.Model.Retrofit.RemoteRx;
 import com.example.vamshi.Curious.Model.PreferencesFactory;
@@ -21,7 +21,7 @@ public interface AppComponent {
     @QFourSquareGetRequest
     RemoteRx FourSquareApi();
 
-    @QGoogleDistanceGetRequest
+    @QPlacePhotosGetRequest
     RemoteRx GoogleApi();
 
 }
